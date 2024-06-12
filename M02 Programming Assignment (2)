@@ -1,0 +1,112 @@
+abstract class GeometricObject {
+  private String color = "white";
+  private boolean filled;
+
+  /** Default construct */
+  protected GeometricObject() {
+  }
+
+  /** Construct a geometric object */
+  protected GeometricObject(String color, boolean filled) {
+    this.color = color;
+    this.filled = filled;
+  }
+
+  /** Getter method for color */
+  public String getColor() {
+    return color;
+  }
+
+  /** Setter method for color */
+  public void setColor(String color) {
+    this.color = color;
+  }
+
+  /** Getter method for filled. Since filled is boolean,
+      so, the get method name is isFilled */
+  public boolean isFilled() {
+    return filled;
+  }
+
+  /** Setter method for filled */
+  public void setFilled(boolean filled) {
+    this.filled = filled;
+  }
+
+  /** Abstract method findArea */
+  public abstract double getArea();
+
+  /** Abstract method getPerimeter */
+  public abstract double getPerimeter();
+}
+
+class Triangle extends GeometricObject {
+  private double side1;
+  private double side2;
+  private double side3;
+
+  /** Default constructor */
+  public Triangle() {
+    this(1.0, 1.0, 1.0);
+  }
+
+  /** Constructor with specified sides */
+  public Triangle(double side1, double side2, double side3) {
+    this.side1 = side1;
+    this.side2 = side2;
+    this.side3 = side3;
+  }
+
+  /** Accessor method for side1 */
+  public double getSide1() {
+    return side1;
+  }
+
+  /** Accessor method for side2 */
+  public double getSide2() {
+    return side2;
+  }
+
+  /** Accessor method for side3 */
+  public double getSide3() {
+    return side3;
+  }
+
+  /** Method to get the area of the triangle */
+  @Override
+  public double getArea() {
+    double s = (side1 + side2 + side3) / 2;
+    return Math.sqrt(s * (s - side1) * (s - side2) * (s - side3));
+  }
+
+  /** Method to get the perimeter of the triangle */
+  @Override
+  public double getPerimeter() {
+    return side1 + side2 + side3;
+  }
+
+  /** Method to return a string description for the triangle */
+  @Override
+  public String toString() {
+    return "Triangle: side1 = " + side1 + " side2 = " + side2 + " side3 = " + side3;
+  }
+}
+
+public class Driver {
+  public static void main(String[] args) {
+    // Create a triangle with default sides
+    Triangle triangle1 = new Triangle();
+    System.out.println("Default Triangle");
+    System.out.println("Area: " + triangle1.getArea());
+    System.out.println("Perimeter: " + triangle1.getPerimeter());
+    System.out.println(triangle1.toString());
+    System.out.println();
+
+    // Create a triangle with specified sides
+    Triangle triangle2 = new Triangle(3.0, 4.0, 5.0);
+    System.out.println("Triangle with sides 3.0, 4.0, 5.0");
+    System.out.println("Area: " + triangle2.getArea());
+    System.out.println("Perimeter: " + triangle2.getPerimeter());
+    System.out.println(triangle2.toString());
+  }
+}
