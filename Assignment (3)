@@ -1,0 +1,43 @@
+public class BinaryConverter {
+
+    // class
+    public static class BinaryFormatException extends Exception {
+        public BinaryFormatException() {
+            super("Invalid binary string format");
+        }
+
+        public BinaryFormatException(String message) {
+            super(message);
+        }
+    }
+
+    // Method to convert binary string to decimal
+    public static int bin2Dec(String binaryString) throws BinaryFormatException {
+        // Check if the string is a valid binary string
+        for (int i = 0; i < binaryString.length(); i++) {
+            char ch = binaryString.charAt(i);
+            if (ch != '0' && ch != '1') {
+                throw new BinaryFormatException("The string " + binaryString + " is not a valid binary string.");
+            }
+        }
+
+        // Convert binary string to decimal
+        int decimalValue = 0;
+        for (int i = 0; i < binaryString.length(); i++) {
+            char ch = binaryString.charAt(i);
+            decimalValue = decimalValue * 2 + (ch - '0');
+        }
+
+        return decimalValue;
+    }
+
+    // Main method for testing
+    public static void main(String[] args) {
+        try {
+            System.out.println(bin2Dec("1101")); // Output: 13
+            System.out.println(bin2Dec("1002")); // Should throw BinaryFormatException
+        } catch (BinaryFormatException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
